@@ -47,4 +47,4 @@ except ValueError:
     print("Number must be an integer!")
     exit(0)
 arr = print_randommas()
-pair_gcd(arr, n
+pair_gcd(arr, n)
