@@ -13,6 +13,22 @@ def gcd_(el, el2):
     return el + el2
 
 
+def print_randommas():
+    mas = random.sample(range(a, b + 1), n)
+    print("Our sequence: ", mas)
+    return mas
+
+
+def pair_gcd(mas, n):
+    print("Pair:", '\t\t\t', "GCD:")
+    for i in range(n):
+        for j in range(i + 1, n):
+            a = mas[i]
+            b = mas[j]
+            print(a, " and ", b, end='\t\t\t')
+            print(gcd_(a, b))
+
+
 try:
     n = int(input("Enter n: "))
     if n < 0:
@@ -30,13 +46,5 @@ try:
 except ValueError:
     print("Number must be an integer!")
     exit(0)
-
-mas = random.sample(range(a, b+1), n)
-print("Our sequence: ", mas)
-print("Pair:", '\t\t\t', "GCD:")
-for i in range(n):
-    for j in range(i+1, n):
-        a = mas[i]
-        b = mas[j]
-        print(a, " and ", b, end='\t\t\t')
-        print(gcd_(a, b))
+arr = print_randommas()
+pair_gcd(arr, n
