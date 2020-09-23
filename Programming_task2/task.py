@@ -134,3 +134,4 @@ while True:
     negative = create_negative(mas)
     result = result_array(n, bool_mas, positive, negative)
     print("Our result: ", result)
+    
