@@ -17,41 +17,36 @@ def menu():
     print("0 - EXIT")
 
 
-def random_array():
-    mas = random.sample(range(-100, 100), n)
-    return mas
-
-
-def input_array():
-    mas=[]
-    for i in range(n):
-        while True:
-            try:
-                print("array[", i, "]: ", end=' ')
-                mas.append(int(input()))
-            except ValueError:
-                print("Number must be an integer! Please, try again.")
-                continue
-            break
-    return mas
-
-
-def right_shift(mas):
+def random_array(n):
     while True:
         try:
-            step = int(input("Enter the shift step: "))
-            if step <= 0:
-                print("Step must be positive! Please, try again")
+            a = validate("Enter the lower limit: ", choice="pos&neg")
+            b = validate("Enter the upper limit: ", choice="pos&neg")
+            if a > b:
+                print("Lower limit > Upper limit! Please, try again.")
                 continue
             break
         except ValueError:
             print("Number must be an integer! Please, try again")
             continue
+    mas = random.sample(range(a, b), n)
+    return mas
+
+
+def input_array(mas, n):
+    for i in range(n):
+        print("array[", i, "]: ", end=' ')
+        el = validate("", choice="pos&neg")
+        mas.append(el)
+
+
+def right_shift(mas):
+    step = validate("Enter the shift step: ", choice="no_neg")
     for i in range(step):
         mas.insert(0, mas.pop())
 
 
-def create_bool(mas):
+def create_bool(mas, n):
      new_mas = []
      for i in range(n):
          if mas[i] < 0 :
@@ -61,7 +56,7 @@ def create_bool(mas):
      return new_mas
 
 
-def create_positive(mas):
+def create_positive(mas, n):
     positive_mas = []
     for i in range(n):
         if mas[i] >= 0:
@@ -70,7 +65,7 @@ def create_positive(mas):
     return positive_mas
 
 
-def create_negative(mas):
+def create_negative(mas, n):
     negative_mas = []
     for i in range(n):
         if mas[i] < 0:
@@ -80,19 +75,23 @@ def create_negative(mas):
     return negative_mas
 
 
-def validate_size():
+def validate(message, choice = " "):
     while True:
         try:
-            size = int(input("Enter size of array: "))
-            if size <= 0:
-                print("Size must be positive! Please, try again")
-                continue
+            el = int(input(message))
+            if choice == "no_neg":
+                if el <= 0:
+                    print("Number must be positive! Please, try again")
+                    continue
+            if choice == "for_response":
+                if el >= 3 or el < 0:
+                    print("The value is incorrect. Please, try again")
+                    continue
             break
         except ValueError:
             print("Number must be an integer! Please, try again")
             continue
-
-    return size
+    return el
 
 
 def result_array(n, bool, pos, neg):
@@ -109,29 +108,21 @@ def result_array(n, bool, pos, neg):
 
 while True:
     menu()
-    while True:
-        try:
-            response = int(input("Your choice: "))
-            if response >= 3 or response < 0:
-                print("The value is incorrect. Please, try again")
-                continue
-            break
-        except ValueError:
-            print("Number must be an integer! Please, try again")
-            continue
+    response = validate("Your choice: ", choice="for_response")
     if response == 0:
         print("Thank you for attention!")
         break
-    n = validate_size()
+    size = validate("Enter size of array:", choice="no_neg")
+    arr = []
     if response == 1:
-        mas = random_array()
-        print("Our sequence: ", mas)
+        arr = random_array(size)
+        print("Our sequence: ", arr)
     if response == 2:
-        mas = input_array()
-        print("Our sequence: ", mas)
-    bool_mas = create_bool(mas)
-    positive = create_positive(mas)
-    negative = create_negative(mas)
-    result = result_array(n, bool_mas, positive, negative)
+        input_array(arr, size)
+        print("Our sequence: ", arr)
+
+    bool_arr = create_bool(arr, size)
+    positive = create_positive(arr, size)
+    negative = create_negative(arr, size)
+    result = result_array(size, bool_arr, positive, negative)
     print("Our result: ", result)
-    
