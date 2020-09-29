@@ -1,5 +1,4 @@
 import task
-
 # Доповнити завдання №2 (програмування).
 # В результуючому масиві знайти число, яке дорівнює К за допомогою бінарного пошуку.
 # Вивести позицію елемента, якщо елементів декілька, то позиції всіх елементів.
@@ -51,27 +50,30 @@ def duplicates(mid, mas, result):
         result.append(mas[el].index)
         el -= 1
 
+'''
+Я не зрозуміла,чи треба було переробляти sort, чи просто зрозуміти вбудовану функцію sorted.
+Тому у мене повністю робочі 2 варіанти 
 
-def validate_element():
-    while True:
-        try:
-            element = int(input("Enter element of array: "))
-            break
-        except ValueError:
-            print("Number must be an integer! Please, try again")
-            continue
-
-    return element
+def sort(arr):
+    for i in range(len(arr)):
+        lowest_value = i
+        for j in range(i + 1, len(arr)):
+            if arr[j].value < arr[lowest_value].value:
+                lowest_value = j
+        arr[i], arr[lowest_value] = arr[lowest_value], arr[i]
+'''
 
 
 def mas_index():
     mas_index = []
     for i in range(len(task.result)):
         mas_index.append(Index(task.result[i], i))
-    mas_index = sorted(mas_index, key = lambda x: x.value)
+    #sort(mas_index)
+    mas_index = sorted(mas_index, key=lambda x: x.value)
     return mas_index
 
 
 mas_ = mas_index()
-element = validate_element()
+element = task.validate("Enter element of array: ", choice="pos&neg")
 print("Index: ", binary_search(mas_, element ))
+
