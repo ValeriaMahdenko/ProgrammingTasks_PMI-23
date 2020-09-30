@@ -49,3 +49,4 @@ while True:
         matrix = [[0] * size for i in range(size)]
         create_diagonal(matrix, size)
         print_matrix(matrix, size, "Our result sequence: ")
+ 
