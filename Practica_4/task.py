@@ -4,11 +4,14 @@
 import random
 from Iterator import *
 from RandomIterator import *
+from Generator import generator
+
 
 def options():
     print("1 - Iterator")
     print("2 - Generator")
     print("0 - EXIT")
+
 
 def gcd_(el, el2):
     while el != 0 and el2 != 0:
@@ -28,13 +31,6 @@ def pair_gcd(mas, n):
             el_2 = mas[j]
             print(el, " and ", el_2, end='\t\t\t')
             print(gcd_(el, el_2))
-
-
-def generator(n, a, b):
-    while n != 0:
-        value = randint(a, b)
-        n -= 1
-        yield value
 
 
 def mas_with_iterator(n, a, b):
