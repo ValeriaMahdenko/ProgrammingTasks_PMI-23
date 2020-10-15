@@ -1,5 +1,6 @@
 from Department import Department
 from operator import attrgetter
+from Validation import Validation
 
 import inspect
 
@@ -26,9 +27,14 @@ class Composition:
         return x
 
     def search(self, key):
-        for_search = []
+        for_search = Composition()
         key = key.lower()
-        for_search = filter(lambda x: any(key in str(s) for s in x.__dict__.values()), self.mas)
+        KeY = key.capitalize()
+        for i in self.mas:
+            for j in i.__dict__.values():
+                if key in j or KeY in j:
+                    for_search.add(i)
+                    break
         return for_search
 
     def delete_by_id(self, iden):
@@ -72,23 +78,20 @@ class Composition:
             print("No element in list with ID " + iden)
 
     def read_txt(self, file_name):
-        try:
-            with open(file_name) as file:
-                d, i = {}, 0
-                for line in file:
-                    try:
-                        if line == "\n":
-                            i += 1
-                            self.mas.append(Department(**d))
-                        else:
-                            key, value = line.split()
-                            d[key[:-1]] = value
-                    except ValueError as a:
-                        print("Element " + str(i) + " " + str(a))
-                        continue
-            file.close()
-        except EOFError:
-            raise ("File not exit")
+        with open(file_name) as file:
+            d, i = {}, 0
+            for line in file:
+                try:
+                    if line == "\n":
+                        i += 1
+                        self.mas.append(Department(**d))
+                    else:
+                        key, value = line.split()
+                        d[key[:-1]] = value
+                except ValueError as a:
+                    print("Element " + str(i) + " " + str(a))
+                    continue
+        file.close()
 
     def write_txt(self, file_name):
         try:
