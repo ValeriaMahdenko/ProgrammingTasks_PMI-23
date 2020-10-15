@@ -78,20 +78,24 @@ class Composition:
             print("No element in list with ID " + iden)
 
     def read_txt(self, file_name):
-        with open(file_name) as file:
-            d, i = {}, 0
-            for line in file:
-                try:
-                    if line == "\n":
-                        i += 1
-                        self.mas.append(Department(**d))
-                    else:
-                        key, value = line.split()
-                        d[key[:-1]] = value
-                except ValueError as a:
-                    print("Element " + str(i) + " " + str(a))
-                    continue
-        file.close()
+        try:
+            with open(file_name) as file:
+                d, i = {}, 0
+                for line in file:
+                    try:
+                        if line == "\n":
+                            i += 1
+                            self.mas.append(Department(**d))
+                        else:
+                            key, value = line.split()
+                            d[key[:-1]] = value
+                    except ValueError as a:
+                        print("Element " + str(i) + " " + str(a))
+                        continue
+            file.close()
+        except EOFError:
+            raise ("File not exit")
+
 
     def write_txt(self, file_name):
         try:
