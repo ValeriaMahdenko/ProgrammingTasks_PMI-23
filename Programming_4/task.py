@@ -1,5 +1,6 @@
 from Department import Department
 from Composition import Composition
+from Validation import Validation
 """
 Створити клас та включити в нього необхідні конструктори та методи доступу до полів класу. 
 Перевантажити операції введення, виведення в потік та інші, які необхідні для виконання завдання. 
@@ -49,14 +50,7 @@ def validate(message, choice=" "):
             continue
     return el
 
-
-def validate_file(filename):
-    try:
-        file = open(filename)
-        return True
-    except IOError as e:
-        print("File does not exist")
-
+el = Validation()
 mas = Composition()
 filename = "Information"
 while True:
@@ -66,7 +60,7 @@ while True:
         print("Thank you for attention!")
         break
     if response == 1:
-        if validate_file(filename) == True:
+        if el.validate_file(filename) == True:
             mas.read_txt(filename)
     if response == 2:
         print("\n\n")
@@ -86,13 +80,13 @@ while True:
     if response == 6:
         print("~~~~~~~~~~~~~~~~~~~~~Search~~~~~~~~~~~~~~~~~~~~~")
         key = input("Enter key:")
-        mas.search(key)
-        search = mas.search(key)
-        for i in search: print(i)
+        arr = mas.search(key)
+        for i in arr: print(i)
     if response == 7:
         print("~~~~~~~~~~~~~~~~~~~~~~EDIT~~~~~~~~~~~~~~~~~~~~")
         edit = input("Id for edit:")
         mas.edit_by_id(edit)
     if response == 8:
-        if validate_file(filename) == True:
+        if el.validate_file(filename) == True:
             mas.write_txt(filename)
+      
