@@ -50,3 +50,12 @@ class Validation:
     def validate_salary(mounth, year):
         if float(mounth) > float(year):
             raise ValueError("Mouthly budget must be < than yearly!")
+
+    @staticmethod
+    def validate_file(filename):
+        try:
+            file = open(filename)
+            return True
+        except IOError as e:
+            print("File does not exist")
+     
