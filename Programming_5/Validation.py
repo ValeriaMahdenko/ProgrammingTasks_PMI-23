@@ -1,7 +1,6 @@
 import re
 from urllib.request import urlopen
 
-
 class Validation:
     @staticmethod
     def decorator_string(func):
@@ -55,4 +54,4 @@ class Validation:
                 raise ValueError("No letters/characters in number!")
             return func(self, value)
         return validate_price
-
+    
