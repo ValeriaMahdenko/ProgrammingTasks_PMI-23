@@ -70,7 +70,6 @@ class Department(object):
     @Validation.decorator_price
     def yearly_budget(self, val):
         self._yearly_budget = val
-        #el.validate_salary(self.monthly_budget, self.yearly_budget)
 
     @property
     def website(self):
