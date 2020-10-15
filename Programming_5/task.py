@@ -1,6 +1,6 @@
 from Department import Department
 from Composition import Composition
-
+from Validation import Validation
 def menu():
     print("1 - read file")
     print("2 - print list")
@@ -28,13 +28,6 @@ def validate(message, choice=" "):
     return el
 
 
-def file(filename):
-    try:
-        file = open(filename)
-        return True
-    except IOError as e:
-        print("File does not exist")
-
 mas = Composition()
 filename = "Information"
 while True:
@@ -44,8 +37,7 @@ while True:
         print("Thank you for attention!")
         break
     if response == 1:
-        if file(filename) == True:
-            mas.read_txt(filename)
+        mas.read_txt(filename)
     if response == 2:
         print("\n")
         for i in mas: print(i)
@@ -64,13 +56,11 @@ while True:
     if response == 6:
         print("~~~~~~~~~~~~~~~~~~~~~Search~~~~~~~~~~~~~~~~~~~~~")
         key = input("Enter key:")
-        mas.search(key)
-        search = mas.search(key)
-        for i in search: print(i)
+        arr = mas.search(key)
+        for i in arr: print(i)
     if response == 7:
         print("~~~~~~~~~~~~~~~~~~~~~~EDIT~~~~~~~~~~~~~~~~~~~~")
         edit = input("Id for edit:")
         mas.edit_by_id(edit)
     if response == 8:
-        if file(filename) == True:
-            mas.write_txt(filename)
+        mas.write_txt(filename)
