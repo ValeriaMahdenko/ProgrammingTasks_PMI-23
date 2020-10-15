@@ -26,18 +26,26 @@ class Composition:
         return x
 
     def search(self, key):
-        for_search = []
+        for_search = Composition()
         key = key.lower()
-        for_search = filter(lambda x: any(key in str(s) for s in x.__dict__.values()), self.mas)
+        KeY = key.capitalize()
+        for i in self.mas:
+            for j in i.__dict__.values():
+                if key in j or KeY in j:
+                    for_search.add(i)
+                    break
         return for_search
 
     def delete_by_id(self, iden):
+        counter = 0
         for i in self.mas:
             if int(i.ID) == int(iden):
+                counter += 1
                 self.mas.remove(i)
-            else:
-                print("No element in list with ID " + iden)
-        return self.mas
+        if counter > 0:
+            return self.mas
+        else:
+            print("No element in list with ID " + iden)
 
     def add_element(self):
         element = Department()
@@ -58,14 +66,16 @@ class Composition:
         #self.mas = sorted(self.mas, key=attrgetter(key))
 
     def edit_by_id(self, iden):
+        counter = 0
         for i in range(len(self.mas)):
             if int(self.mas[i]._ID) == int(iden):
+                counter += 1
                 new = Department()
                 new.input()
                 self.mas.insert(i, new)
-                self.mas.remove(self.mas[i+1])
-            else:
-                print("No element in list with ID " + iden)
+                self.mas.remove(self.mas[i + 1])
+        if counter == 0:
+            print("No element in list with ID " + iden)
 
     def read_txt(self, file_name):
         try:
@@ -93,4 +103,3 @@ class Composition:
             f.close()
         except EOFError:
             raise ("File not exit")
-
