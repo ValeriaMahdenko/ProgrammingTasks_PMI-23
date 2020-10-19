@@ -35,58 +35,47 @@ def menu():
     print("8 - write file")
     print("0 - EXIT")
 
-
-def validate(message, choice=" "):
+def main():
+    el = Validation()
+    mas = Composition()
+    filename = "Information"
     while True:
-        try:
-            el = int(input(message))
-            if choice == "for_response":
-                if el < 0 or el >= 9:
-                    print("The value is incorrect! Please, try again")
-                    continue
+        menu()
+        response = input("Your choice: ")
+        if response == "0":
+            print("Thank you for attention!")
             break
-        except ValueError:
-            print("Number must be an integer! Please, try again")
-            continue
-    return el
+        if response == "1":
+            if el.validate_file(filename) == True:
+                mas.read_txt(filename)
+        if response == "2":
+            print("\n\n")
+            for i in mas: print(i)
+        if response == "3":
+            print("~~~~~~~~~~~~~~~~ADD~~~~~~~~~~~~~~~~~~~~")
+            mas.add_element()
+        if response == "4":
+            print("~~~~~~~~~~~~~~~~~~~~~~DELETE BY ID~~~~~~~~~~~~~~~~")
+            delete = input("ID FOR DELETE:")
+            mas.delete_by_id(delete)
+        if response == "5":
+            print("~~~~~~~~~~~~~Sort~~~~~~~~~~~~~~~~~~")
+            word = input("Enter key")
+            SORT = mas.sort(key=word)
+            for i in SORT: print(i)
+        if response == "6":
+            print("~~~~~~~~~~~~~~~~~~~~~Search~~~~~~~~~~~~~~~~~~~~~")
+            key = input("Enter key:")
+            arr = mas.search(key)
+            for i in arr: print(i)
+        if response == "7":
+            print("~~~~~~~~~~~~~~~~~~~~~~EDIT~~~~~~~~~~~~~~~~~~~~")
+            edit = input("Id for edit:")
+            mas.edit_by_id(edit)
+        if response == "8":
+            if el.validate_file(filename) == True:
+                mas.write_txt(filename)
+        else:
+            print("The value is incorrect! Please, try again")
 
-el = Validation()
-mas = Composition()
-filename = "Information"
-while True:
-    menu()
-    response = validate("Your choice: ", choice="for_response")
-    if response == 0:
-        print("Thank you for attention!")
-        break
-    if response == 1:
-        if el.validate_file(filename) == True:
-            mas.read_txt(filename)
-    if response == 2:
-        print("\n\n")
-        for i in mas: print(i)
-    if response == 3:
-        print("~~~~~~~~~~~~~~~~ADD~~~~~~~~~~~~~~~~~~~~")
-        mas.add_element()
-    if response == 4:
-        print("~~~~~~~~~~~~~~~~~~~~~~DELETE BY ID~~~~~~~~~~~~~~~~")
-        delete = input("ID FOR DELETE:")
-        mas.delete_by_id(delete)
-    if response == 5:
-        print("~~~~~~~~~~~~~Sort~~~~~~~~~~~~~~~~~~")
-        word = input("Enter key")
-        SORT = mas.sort(key=word)
-        for i in SORT: print(i)
-    if response == 6:
-        print("~~~~~~~~~~~~~~~~~~~~~Search~~~~~~~~~~~~~~~~~~~~~")
-        key = input("Enter key:")
-        arr = mas.search(key)
-        for i in arr: print(i)
-    if response == 7:
-        print("~~~~~~~~~~~~~~~~~~~~~~EDIT~~~~~~~~~~~~~~~~~~~~")
-        edit = input("Id for edit:")
-        mas.edit_by_id(edit)
-    if response == 8:
-        if el.validate_file(filename) == True:
-            mas.write_txt(filename)
-      
+main()
