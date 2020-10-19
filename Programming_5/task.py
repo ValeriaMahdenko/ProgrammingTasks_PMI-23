@@ -23,8 +23,7 @@ def main():
             print("Thank you for attention!")
             break
         if response == "1":
-            if el.file(filename) == True:
-                mas.read_txt(filename)
+            mas.read_txt(filename)
         if response == "2":
             print("\n")
             for i in mas: print(i)
@@ -50,8 +49,7 @@ def main():
             edit = input("Id for edit:")
             mas.edit_by_id(edit)
         if response == "8":
-            if el.file(filename) == True:
-                mas.write_txt(filename)
+            mas.write_txt(filename)
         else:
             print("The value is incorrect! Please, try again")
 
