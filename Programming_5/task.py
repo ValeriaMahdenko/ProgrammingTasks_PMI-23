@@ -22,33 +22,33 @@ def main():
         if response == "0":
             print("Thank you for attention!")
             break
-        if response == "1":
+        elif response == "1":
             mas.read_txt(filename)
-        if response == "2":
+        elif response == "2":
             print("\n")
             for i in mas: print(i)
-        if response == "3":
+        elif response == "3":
             print("~~~~~~~~~~~~~~~~ADD~~~~~~~~~~~~~~~~~~~~")
             mas.add_element()
-        if response == "4":
+        elif response == "4":
             print("~~~~~~~~~~~~~~~~~~~~~~DELETE BY ID~~~~~~~~~~~~~~~~")
             delete = input("ID FOR DELETE:")
             mas.delete_by_id(delete)
-        if response == "5":
+        elif response == "5":
             print("~~~~~~~~~~~~~Sort~~~~~~~~~~~~~~~~~~")
             word = input("Enter key")
             SORT = mas.sort(key=word)
             for i in SORT: print(i)
-        if response == "6":
+        elif response == "6":
             print("~~~~~~~~~~~~~~~~~~~~~Search~~~~~~~~~~~~~~~~~~~~~")
             key = input("Enter key:")
             arr = mas.search(key)
             for i in arr: print(i)
-        if response == "7":
+        elif response == "7":
             print("~~~~~~~~~~~~~~~~~~~~~~EDIT~~~~~~~~~~~~~~~~~~~~")
             edit = input("Id for edit:")
             mas.edit_by_id(edit)
-        if response == "8":
+        elif response == "8":
             mas.write_txt(filename)
         else:
             print("The value is incorrect! Please, try again")
