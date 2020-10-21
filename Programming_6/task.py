@@ -11,6 +11,8 @@ def menu():
     print("6 - search")
     print("7 - edit element by ID")
     print("8 - write file")
+    print("prev  - command undo ")
+    print("next - command redo")
     print("0 - EXIT")
 
 
@@ -63,8 +65,8 @@ def main():
         elif response == "6":
             print("~~~~~~~~~~~~~~~~~~~~~Search~~~~~~~~~~~~~~~~~~~~~")
             key = input("Enter key: ")
-            mas = mas.search(key)
-            add_Memento(originator, caretaker, mas)
+            search = mas.search(key)
+            for i in search: print(i)
 
         elif response == "7":
             print("~~~~~~~~~~~~~~~~~~~~~~EDIT~~~~~~~~~~~~~~~~~~~~")
@@ -82,6 +84,7 @@ def main():
         elif response == "next":
             originator.restore(caretaker.redo())
             printState(originator)
+
         else:
             print("The value is incorrect! Please, try again")
 
