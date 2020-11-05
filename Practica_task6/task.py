@@ -84,9 +84,5 @@ def main():
             pair_gcd(list)
         elif response == 7:
             print(list)
-        '''if response == 3 or response == 4 or response == 5:
-            Observer.attach('add', Logger.write_to_file(event, "Result.txt"))
-            print("Yeeeeeeeeeeeeees")
-            print(event)'''
 
 main()
