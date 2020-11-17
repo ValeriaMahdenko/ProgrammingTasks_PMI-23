@@ -7,10 +7,6 @@ el = Validation()
 
 
 class Department(object):
-    '''def __init__(self, **array):
-        for(key, value) in array.items():
-            setattr(self, key, array.get(key, value))'''
-
     def __init__(self, title, director_name, phone_number, monthly_budget, yearly_budget, website_url):
         self.title = title
         self.director_name = director_name
