@@ -9,12 +9,9 @@ from Department import Department
 
 app = Flask(__name__)
 
-with open('info.json') as f:
-    myinfo = json.load(f)
+DB_URI = "mysql+pymysql://{user}:{password}@{host}:{port}/{db}".format(user='root', password='12345678', host="127.0.0.1",
+                                                                       port="3306", db="departments")
 
-DB_URI = "mysql+pymysql://{user}:{password}@{host}:{port}/{db}".format(user=myinfo["user"], password=myinfo["password"],
-                                                                       host=myinfo["host"], port=myinfo["port"],
-                                                                       db=myinfo["db"])
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -147,4 +144,4 @@ def delete_data(id):
 if __name__ == '__main__':
     db.create_all()
     db.session.commit()
-    app.run(debug=True, host='127.0.0.1')
+    app.run(debug=True)
