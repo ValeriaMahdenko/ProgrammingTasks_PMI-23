@@ -2,6 +2,7 @@ from Func_for_task import *
 from Context import *
 import threading
 from Observer_classes import *
+import time
 
 def menu():
     print("1 - Strategy 1")
@@ -13,6 +14,11 @@ def menu():
     print("7 - Print list")
     print("8 - EXIT")
 
+def delete_range(lst, finish, start):
+    count = finish - start + 1
+    for i in range(count):
+        lst.remove(start)
+    return lst
 
 def delete_in_range(list_iter, list_file):
     counter = 0
@@ -24,25 +30,15 @@ def delete_in_range(list_iter, list_file):
         counter+=1
         print("Start_position must be < finish_position")
     if finish < len(list_iter):
-        count = finish - start + 1
-        print("Starting 1...")
-        for i in range(count):
-            th_1 = Thread_element(list_iter.remove, start)
-            th_1.start()
+        th1 = create_thread(delete_range, list_iter,  finish, start)
     if finish < len(list_file):
-        count = finish - start + 1
-        print("\nStarting 2...")
-        for i in range(count):
-            th_2 = Thread_element(list_file.remove, start)
-            th_2.start()
+        th2 = create_thread(delete_range, list_file,  finish, start)
     else:
         counter+=1
         print("Finish must be < size of list")
     if counter == 0:
-        print("\nFinishing 1...")
-        th_1.join()
-        print("Finishing 2...")
-        th_2.join()
+        process([th1, th2])
+
     event = Event('Delete element by position(s)', copy_iter, list_iter, pos1=None, pos2=[start, finish])
     Observer.new('Delete element by position(s)', Logger.write_to_file(event, "Result.txt"))
     event = Event('Delete element by position(s)', cope_file, list_file, pos1=None, pos2=[start, finish])
@@ -55,14 +51,14 @@ def delete_el(list_iter, list_file):
     cope_file = list_file.copy()
     pos = v.valid_positive("Enter position in list for delete:")
     if pos < len(list_iter):
-        th1 = Thread_element(list_iter.remove, pos)
+        th1 = create_thread(list_iter.remove, pos)
     if pos < len(list_file):
-        th2 = Thread_element(list_file.remove, pos)
+        th2 = create_thread(list_file.remove, pos)
     else:
         counter+=1
         print("Position must be < size of list ")
     if counter == 0:
-        process(th1, th2)
+        process([th1, th2])
 
     event = Event('Delete element by position(s)', copy_iter, list_iter, pos, pos2=None)
     Observer.new('Delete element by position(s)', Logger.write_to_file(event, "Result.txt"))
@@ -70,30 +66,23 @@ def delete_el(list_iter, list_file):
     Observer.new('Delete element by position(s)', Logger.write_to_file(event, "Result.txt"))
 
 
-def process(th1, th2):
-    print("Starting 1...")
-    th1.start()
-    print("\nStarting 2...")
-    th2.start()
-    print("\nFinish 1")
-    th1.join()
-    print("Finish 2")
-    th2.join()
+def process(list):
+    for i in list:
+        print("starting...")
+        i.start()
+        print("finishing...")
+        i.join()
 
 
 def print_list(list):
     for i in range(len(list)):
         print(list[i], end=" ")
+    print("\n")
 
 
-def Thread_list(func, *arg):
-    thread_1 = threading.Thread(target=func, args=(arg,))
+def create_thread(func, *arg):
+    thread_1 = threading.Thread(target=func, args=[*arg, ])
     return thread_1
-
-def Thread_element(func, arg):
-    thread_2 = threading.Thread(target=func, args=(arg,))
-    return thread_2
-
 
 def main():
     list_iter = Double_List()
@@ -133,15 +122,12 @@ def main():
         if response == 5:
             delete_in_range(list_iter, list_file)
         if response == 6:
-            th1 = Thread_list(pair_gcd, *list_iter)
-            th1.start()
-            th1.join()
-            th2 = Thread_list(pair_gcd, *list_file)
-            th2.start()
-            th2.join()
+            th1 = create_thread(pair_gcd, [*list_iter])
+            th2 = create_thread(pair_gcd, [*list_file])
+            process([th1, th2])
         if response == 7:
-            th1 = Thread_list(print_list, list_iter)
-            th2 = Thread_list(print_list, list_file)
-            process(th1, th2)
+            th1 = create_thread(print_list, list_iter)
+            th2 = create_thread(print_list, list_file)
+            process([th1, th2])
 
 main()
