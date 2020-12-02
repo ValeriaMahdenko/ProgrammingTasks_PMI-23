@@ -55,11 +55,12 @@ def load_user(user_id):
     return UserTable.query.get(int(user_id))
 
 
-@app.route('/', methods=['POST'])
-@login_required
+@app.route('/', methods=['GET'])
 def index():
     if 'loggedin' in session:
         return current_user.first_name + " " + current_user.second_name + " - is active!"
+    else:
+        return "No active user!"
 
 
 @app.route('/departments/login', methods=['POST'])
