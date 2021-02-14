@@ -1,4 +1,0 @@
- Insert data on/by position 0  ->  	 No changed list:[]		 New list: [12, 17, 18, 16, 13] 
- Insert data on/by position 2  ->  	 No changed list:[12, 17, 18, 16, 13]		 New list: [12, 17, 5, 4, 2, 10, 55, 12, 3, 6, 18, 16, 13] 
- Delete element by position(s) on/by position 2  ->  	 No changed list:[12, 17, 5, 4, 2, 10, 55, 12, 3, 6, 18, 16, 13]		 New list: [12, 17, 4, 2, 10, 55, 12, 3, 6, 18, 16, 13] 
- Delete element by position(s) on/by position [1-4]   ->  	 No changed list:[12, 17, 4, 2, 10, 55, 12, 3, 6, 18, 16, 13]		 New list: [12, 55, 12, 3, 6, 18, 16, 13]
